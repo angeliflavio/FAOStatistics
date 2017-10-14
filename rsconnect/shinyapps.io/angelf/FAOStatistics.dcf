@@ -1,0 +1,13 @@
+name: FAOStatistics
+title: FAOStatistics
+username:
+account: angelf
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 222838
+bundleId: 1026905
+url: https://angelf.shinyapps.io/FAOStatistics/
+when: 1508015485.49169
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: README.md

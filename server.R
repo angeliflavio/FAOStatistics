@@ -31,11 +31,12 @@ shinyServer(function(input, output) {
     
     output$motionapple <- renderGvis({
         a <- apple[,c('Area','Element','Year','Value')]
-        if (input$countryapplemotion!='All'){
-            a <- filter(a,Area %in% input$countryapplemotion)
+        names(a) <- c('Paese','Misura','Anno','Valore')
+        if (input$countryapplemotion!='Tutti'){
+            a <- filter(a, Paese %in% input$countryapplemotion)
         }
-        p <- spread(a,Element,Value)
-        m <- gvisMotionChart(p, idvar = "Area", timevar = "Year",
+        p <- spread(a,Misura,Valore)
+        m <- gvisMotionChart(p, idvar = "Paese", timevar = "Anno",
                              options=list(width='800'))
         m
     })
@@ -59,11 +60,11 @@ shinyServer(function(input, output) {
     
     output$motionwine <- renderGvis({
         a <- wine[,c('Area','Element','Year','Value')]
-        names(a) <- c('Area','Measure','Year','Production')
-        if (input$countrywinemotion!='All'){
-            a <- filter(a,Area %in% input$countrywinemotion)
+        names(a) <- c('Paese','Misura','Anno','Produzione')
+        if (input$countrywinemotion!='Tutti'){
+            a <- filter(a, Paese %in% input$countrywinemotion)
         }
-        w <- gvisMotionChart(a, idvar = "Area", timevar = "Year",sizevar = 'Production',
+        w <- gvisMotionChart(a, idvar = "Paese", timevar = "Anno",sizevar = 'Produzione',
                              options=list(width='800'))
         w
     })

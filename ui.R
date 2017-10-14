@@ -7,139 +7,131 @@ apple <- read.csv('apple.csv',sep = ',')
 wine <- read.csv('wine.csv',sep = ',')
 
 shinyUI(
-    navbarPage(theme=shinythemes::shinytheme('cerulean'),title='FAO Statistics',
-               tabPanel('Apple',
+    navbarPage(theme=shinythemes::shinytheme('cerulean'),title='Statistiche FAO',
+               tabPanel('Mele',
                         tabsetPanel(
-                            tabPanel('World Map',
+                            tabPanel('Mappa',
                                      br(),
                                      sidebarLayout(
                                          sidebarPanel(
-                                             selectInput('measuremap','Measure',
-                                                         choices = c('Production Quantity (tonnes)'= 'Production',
-                                                                     'Area Harvested (ha)'='Area harvested',
-                                                                     'Yield (hg/ha)'='Yield'),
-                                                         selected = 'Production Quantity'),
-                                             selectInput('yearmap','Year',
+                                             selectInput('measuremap','Misura',
+                                                         choices = c('Produzione (ton)'= 'Production',
+                                                                     'Superficie (ettari)'='Area harvested',
+                                                                     'Resa (hg/ettaro)'='Yield'),
+                                                         selected = 'Produzione'),
+                                             selectInput('yearmap','Anno',
                                                          choices = seq(1961,2014),selected = 2014),
                                              br(),
-                                             tags$a(href='http://www.fao.org','FAO Data') 
+                                             tags$a(href='http://www.fao.org','Fonte FAO') 
                                         ),
                                          mainPanel(
-                                             h3(paste('Global Apple Statistics')),
                                              br(),
                                              htmlOutput('worldmap'))
                                      )
                                      ),
-                            tabPanel('Motion Chart',
+                            tabPanel('Grafico',
                                      br(),
                                      sidebarLayout(
                                          sidebarPanel(
-                                             selectInput('countryapplemotion','Countries',
-                                                         choices = c('All',as.vector(unique(apple$Area))),
-                                                         selected = 'All',
+                                             selectInput('countryapplemotion','Paesi',
+                                                         choices = c('Tutti',as.vector(unique(apple$Area))),
+                                                         selected = 'Tutti',
                                                          multiple = T),
-                                             bsTooltip('countryapplemotion','You can select multiple Countries',
+                                             bsTooltip('countryapplemotion','Selezione singola o multipla',
                                                        options = list(container = "body")),
                                              br(),
-                                             tags$a(href='http://www.fao.org','FAO Data')
+                                             tags$a(href='http://www.fao.org','Fonte FAO')
                                          ),
                                          mainPanel(
-                                             h3('Apple Statistics Motion Chart'),
                                              br(),
                                              htmlOutput('motionapple')
                                          )
                                      )
                                      ),
-                            tabPanel('Timeline',
+                            tabPanel('Grafico storico',
                                      br(),
                                      sidebarLayout(
                                          sidebarPanel(
-                                             selectInput('measuretimeline','Measure',
-                                                         choices = c('Production Quantity (tonnes)'= 'Production',
-                                                                     'Area Harvested (ha)'='Area harvested',
-                                                                     'Yield (hg/ha)'='Yield'),
-                                                         selected = 'Production Quantity'),
-                                             selectInput('countrytimeline','Country',
+                                             selectInput('measuretimeline','Misura',
+                                                         choices = c('Produzione (ton)'= 'Production',
+                                                                     'Superficie (ettari)'='Area harvested',
+                                                                     'Resa (hg/ettaro)'='Yield'),
+                                                         selected = 'Produzione (ton)'),
+                                             selectInput('countrytimeline','Paesi',
                                                          choices = as.vector(unique(apple$Area)),
                                                          selected = 'Italy',
                                                          multiple = T),
-                                             bsTooltip('countrytimeline','You can select multiple Countries',
+                                             bsTooltip('countrytimeline','Selezione singola o multipla',
                                                        options = list(container = "body")),
                                              br(),
-                                             tags$a(href='http://www.fao.org','FAO Data')
+                                             tags$a(href='http://www.fao.org','Fonte FAO')
                                          ),
                                          mainPanel(
-                                             h3('Historical Apple Statistics'),
                                              br(),
                                              htmlOutput('timeline'))
                                      )
                                      ),
-                            tabPanel('Data',
+                            tabPanel('Tabella',
                                      br(),
                                      dataTableOutput('table'))
                         )),
-               tabPanel('Wine',
+               tabPanel('Vino',
                         tabsetPanel(
-                            tabPanel('World Map',
+                            tabPanel('Mappa',
                                      br(),
                                      sidebarLayout(
                                          sidebarPanel(
-                                             selectInput('yearmapwine','Year',
+                                             selectInput('yearmapwine','Anno',
                                                          choices = seq(1961,2014),selected = 2014),
                                              br(),
-                                             tags$a(href='http://www.fao.org','FAO Data')
+                                             tags$a(href='http://www.fao.org','Fonte FAO')
                                          ),
                                          mainPanel(
-                                             h3('Global Wine Production in tonnes'),
                                              br(),
                                              htmlOutput('worldmapwine'))
                                      )),
-                            tabPanel('Motion Chart',
+                            tabPanel('Grafico',
                                      br(),
                                      sidebarLayout(
                                          sidebarPanel(
-                                             selectInput('countrywinemotion','Countries',
-                                                         choices = c('All',as.vector(unique(wine$Area))),
-                                                         selected = 'All',
+                                             selectInput('countrywinemotion','Paesi',
+                                                         choices = c('Tutti',as.vector(unique(wine$Area))),
+                                                         selected = 'Tutti',
                                                          multiple = T),
-                                             bsTooltip('countrywinemotion','You can select multiple Countries',
+                                             bsTooltip('countrywinemotion','Selezione singola o multipla',
                                                        options = list(container = "body")),
                                              br(),
-                                             tags$a(href='http://www.fao.org','FAO Data')
+                                             tags$a(href='http://www.fao.org','Fonte FAO')
                                          ),
                                          mainPanel(
-                                             h3('Wine Statistics Motion Chart'),
                                              br(),
                                              htmlOutput('motionwine')
                                          )
                                      )),
-                            tabPanel('Timeline',
+                            tabPanel('Grafico storico',
                                      br(),
                                      sidebarLayout(
                                          sidebarPanel(
-                                             selectInput('countrytimelinewine','Country',
+                                             selectInput('countrytimelinewine','Paesi',
                                                          choices = as.vector(unique(wine$Area)),
                                                          selected = 'Italy',
                                                          multiple = T),
-                                             bsTooltip('countrytimelinewine','You can select multiple Countries',
+                                             bsTooltip('countrytimelinewine','Selezione singola o multipla',
                                                        options = list(container = "body")),
                                              br(),
-                                             tags$a(href='http://www.fao.org','FAO Data')
+                                             tags$a(href='http://www.fao.org','Fonte FAO')
                                          ),
                                          mainPanel(
-                                             h3('Historical Production in tonnes'),
                                              br(),
                                              htmlOutput('timelinewine'))
                                      )),
-                            tabPanel('Data',
+                            tabPanel('Tabella',
                                      br(),
                                      dataTableOutput('tablewine'))
                         )),
-               tabPanel('Help',
-                        includeMarkdown('help.md')),
                br(),
                br(),
-               tags$a(img(src='github.png'),href='https://github.com/angeliflavio'))
+               tags$a(img(src='github.png'),href='https://github.com/angeliflavio/FAOStatistics'))
 )
 
 
